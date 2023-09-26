@@ -2,8 +2,8 @@ import pandas as pd
 import string
 import nltk
 
-nltk.download("punkt")
-nltk.download("stopwords")
+nltk.download("punkt", quiet=True)
+nltk.download("stopwords", quiet=True)
 from nltk.stem.snowball import EnglishStemmer
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
