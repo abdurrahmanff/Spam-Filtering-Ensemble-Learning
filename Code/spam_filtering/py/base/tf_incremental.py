@@ -1,5 +1,6 @@
 from tensorflow.keras.callbacks import EarlyStopping
-from tensorflow.keras.layers import Embedding, Sequential
+from tensorflow.keras.layers import Embedding
+from tensorflow.keras import Sequential
 from tensorflow.keras.losses import BinaryCrossentropy
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.metrics import Precision, Recall
