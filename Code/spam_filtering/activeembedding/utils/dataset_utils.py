@@ -62,4 +62,3 @@ class DatasetUtils:
             self._preprocess_each_row
         )
         self.dataset.dropna(inplace=True)
-        print("Finished preprocessing {} data".format(self.name).center(30, "-"))
