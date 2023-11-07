@@ -1,4 +1,4 @@
-from activeembedding.base import TensorIncrementalClassifier
+from active_embedding.base import TensorIncrementalClassifier
 import numpy as np
 
 

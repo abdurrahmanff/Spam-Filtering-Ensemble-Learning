@@ -1,9 +1,9 @@
-from tensorflow.keras.layers import TextVectorization
+import tensorflow as tf
 
 
 class TFVectorizer:  # pake tensorflow
     def __init__(self):
-        self.vectorizer = TextVectorization(output_mode="tf_idf")
+        self.vectorizer = tf.keras.layers.TextVectorization(output_mode="tf_idf")
         self.vocab_size = None
 
     def adapt(self, X):

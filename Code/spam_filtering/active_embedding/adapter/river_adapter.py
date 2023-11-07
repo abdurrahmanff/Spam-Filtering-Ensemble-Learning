@@ -6,7 +6,8 @@ class RiverMLAdapter:  # Kelas yang digunakan sebagai adapter untuk algoritma ya
     def predict(self, X):
         result = []
         for i in X:
-            result.append(self.model.predict_proba_one(i)[1])
+            prediction = list(self.model.predict_proba_one(i).values())
+            result.append(prediction[1])
 
         return result
 

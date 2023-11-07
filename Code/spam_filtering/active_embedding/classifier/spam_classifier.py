@@ -1,3 +1,9 @@
+import pandas as pd
+import numpy as np
+from scipy.stats import mode
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
+
+
 class SpamClassifier:  # Kelas utama yang menampung ensemble classifier
     def __init__(self, classifiers):
         self.classifiers = (
@@ -77,8 +83,8 @@ class SpamClassifier:  # Kelas utama yang menampung ensemble classifier
                 ).center(30, "-")
             )
             temp = self.classifiers[index].predict(X)
-            temp[temp <= self.prediction_threshold] = 0
-            temp[temp > self.prediction_threshold] = 1
+            for i in range(0, len(temp)):
+                temp[i] = 0 if temp[i] <= self.prediction_threshold else 1
             raw_predictions.append(temp)
 
         raw_predictions = np.stack((raw_predictions), axis=1)

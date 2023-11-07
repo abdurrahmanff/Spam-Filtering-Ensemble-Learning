@@ -1,37 +1,32 @@
-from tensorflow.keras.callbacks import EarlyStopping
-from tensorflow.keras.layers import Embedding
-from tensorflow.keras import Sequential
-from tensorflow.keras.losses import BinaryCrossentropy
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.metrics import Precision, Recall
+import tensorflow as tf
 
 
 class TensorIncrementalClassifier:
     def __init__(self):
-        self.es = EarlyStopping(
+        self.es = tf.keras.callbacks.EarlyStopping(
             monitor="precision", patience=3, mode="max", restore_best_weights=True
         )
         self.base_layers = []
         self.weights = None
-        self.model: None | Sequential = None
+        self.model: None | tf.keras.Sequential = None
 
     def create_model(self, input_dim):
-        embedding_layer = Embedding(
+        embedding_layer = tf.keras.layers.Embedding(
             input_dim,
             output_dim=64,
             # mask_zero=True
         )
-        model = Sequential([embedding_layer])
+        model = tf.keras.Sequential([embedding_layer])
         for layer in self.base_layers:
             model.add(layer)
 
         model.compile(
-            loss=BinaryCrossentropy(),
-            optimizer=Adam(),
+            loss=tf.keras.losses.BinaryCrossentropy(),
+            optimizer=tf.keras.optimizers.Adam(),
             metrics=[
                 "accuracy",
-                Precision(name="precision"),
-                Recall(name="recall"),
+                tf.keras.metrics.Precision(name="precision"),
+                tf.keras.metrics.Recall(name="recall"),
             ],
         )
 
@@ -52,7 +47,7 @@ class TensorIncrementalClassifier:
             y_train,
             epochs=50,
             validation_data=(X_test, y_test),
-            callbacks=[self.es],
+            # callbacks=[self.es],
         )
 
     def predict(self, X):
