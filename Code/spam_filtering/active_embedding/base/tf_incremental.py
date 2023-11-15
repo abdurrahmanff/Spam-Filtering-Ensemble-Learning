@@ -35,11 +35,16 @@ class TensorIncrementalClassifier:
     def save_weight(self):
         self.weights = self.model.get_weights()
 
-    def update(self, input_dim, X_train, y_train):
+    def update(self, input_dim, X_train, y_train, X_val, y_val):
         self.save_weight()
         self.model = self.create_model(input_dim)
         self.model.set_weights(self.weights)
-        self.model.fit(X_train, y_train, epochs=50, callbacks=[self.es])
+        self.fit(
+            X_train=X_train,
+            y_train=y_train,
+            X_test=X_val,
+            y_test=y_val,
+        )
 
     def fit(self, X_train, y_train, X_test, y_test):
         self.model.fit(

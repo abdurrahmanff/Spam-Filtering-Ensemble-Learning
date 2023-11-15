@@ -19,6 +19,6 @@ class TensorFlowAdapter:  # Kelas yang digunakan sebagai adapter untuk algoritma
         X_test = self.__extract_value(X_test)
         self.model.fit(X_train, y_train, X_test, y_test)
 
-    def update(self, input_dim, X_train, y_train):
+    def update(self, input_dim, X_train, y_train, X_val, y_val):
         X_train = self.__extract_value(X_train)
-        self.model.update(input_dim, X_train, y_train)
+        self.model.update(input_dim, X_train, y_train, X_val, y_val)

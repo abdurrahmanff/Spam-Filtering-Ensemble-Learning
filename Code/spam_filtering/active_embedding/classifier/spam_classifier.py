@@ -29,15 +29,15 @@ class SpamClassifier:  # Kelas utama yang menampung ensemble classifier
     def train(self, X_train, X_test, y_train, y_test):
         self.__train_classifiers(X_train, X_test, y_train, y_test)
 
-    def __update_classifiers(self, X, y):
+    def __update_classifiers(self, input_dim, X, y, X_val, y_val):
         for index in range(len(self.classifiers)):
             print(
                 " Update {} model ".format(self.classifiers[index].name).center(30, "+")
             )
-            self.classifiers[index].update(X, y)
+            self.classifiers[index].update(input_dim, X, y, X_val, y_val)
 
-    def update(self, X, y):
-        self.__update_classifiers(X, y)
+    def update(self, input_dim, X, y, X_val, y_val):
+        self.__update_classifiers(input_dim, X, y, X_val, y_val)
 
     def __evaluate_model(
         self, y_true, prediction
