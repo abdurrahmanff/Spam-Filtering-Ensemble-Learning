@@ -1,4 +1,5 @@
 from river.feature_extraction import TFIDF
+import math
 
 
 class RiverVectorizer:  # ini yang pake river
@@ -6,10 +7,21 @@ class RiverVectorizer:  # ini yang pake river
         self.vectorizer = TFIDF()
         self.vocab_size = None
 
+    def __calculate_idf(self, count):
+        return math.log((1 + self.vectorizer.n) / (1 + count)) + 1
+
     def adapt(self, X):
         for sentence in X:
             self.vectorizer = self.vectorizer.learn_one(sentence)
+        self.vectorizer.dfs = dict(
+            filter(
+                lambda pair: self.__calculate_idf(pair[1]) < 8,
+                self.vectorizer.dfs.items(),
+            )
+        )
+        # print(self.vectorizer.dfs)
         self.vocab_size = len(self.vectorizer.dfs)
+        # print(self.vocab_size)
 
     def transform(self, X):
         result = []
