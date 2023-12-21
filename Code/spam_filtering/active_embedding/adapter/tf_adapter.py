@@ -21,4 +21,5 @@ class TensorFlowAdapter:  # Kelas yang digunakan sebagai adapter untuk algoritma
 
     def update(self, input_dim, X_train, y_train, X_val, y_val):
         X_train = self.__extract_value(X_train)
+        X_val = self.__extract_value(X_val)
         self.model.update(input_dim, X_train, y_train, X_val, y_val)

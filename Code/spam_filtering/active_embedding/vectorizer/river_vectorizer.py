@@ -26,8 +26,9 @@ class RiverVectorizer:  # ini yang pake river
     def transform(self, X):
         result = []
         for row in X:
-            if row not in self.vectorizer.dfs:
-                pass
+            clean_word = []
+            clean_word = (clean_word.append(word) for word in row if word in self.vectorizer.dfs.keys())
+            row = ' '.join(clean_word)
             raw_vector = self.vectorizer.transform_one(row)
             full_vector = {}
             for word in self.vectorizer.dfs.keys():  # cek semua vocab
